@@ -5,7 +5,8 @@ usage: ./main <route_file> [(lookup_file|all)]
   [(lookup_file|all)] : run lookups test; if omitted, run performance test
 ```
 
-## example
+## 全数テスト (IPv4)
+
 ```
 ./main tests/edited.rib.20251001.0000.ipv4.txt all
 ```

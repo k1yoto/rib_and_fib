@@ -8,19 +8,43 @@
 #include "fib.h"
 
 /* key: address, s: start bit, n: number of bits */
-static inline uint16_t
+// static inline uint16_t
+// BIT_INDEX1 (const uint8_t *key, int s, int n)
+// {
+//   uint8_t key_safe[17]; /* sentinel */
+//   memcpy (key_safe, key, 16);
+//   key_safe[16] = 0;
+
+//   /* 
+//    *  extract from two bytes comprising byte to 
+//    *  which s belongs and adjacent byte
+//    */
+//   return (((key_safe[s >> 3] << 8) | (key_safe[(s >> 3) + 1])) >>
+//           (16 - ((s & 0x7) + n))) & ((1 << n) - 1);
+// }
+
+// static inline uint32_t
+// BIT_INDEX2 (const uint8_t *key, int s, int n)
+// {
+//   uint32_t key32 = ((uint32_t)key[0] << 24) | ((uint32_t)key[1] << 16)
+//                    | ((uint32_t)key[2] << 8) | ((uint32_t)key[3]);
+//   return (((uint64_t)(key32) << 32 >> (64 - ((s) + (n)))) & ((1 << (n)) - 1));
+// }
+
+static inline uint32_t
 BIT_INDEX (const uint8_t *key, int s, int n)
 {
-  uint8_t key_safe[17]; /* sentinel */
-  memcpy (key_safe, key, 16);
-  key_safe[16] = 0;
+  __uint128_t key128 =
+      ((__uint128_t) key[0] << 120) | ((__uint128_t) key[1] << 112) |
+      ((__uint128_t) key[2] << 104) | ((__uint128_t) key[3] << 96)  |
+      ((__uint128_t) key[4] << 88)  | ((__uint128_t) key[5] << 80)  |
+      ((__uint128_t) key[6] << 72)  | ((__uint128_t) key[7] << 64)  |
+      ((__uint128_t) key[8] << 56)  | ((__uint128_t) key[9] << 48)  |
+      ((__uint128_t) key[10] << 40) | ((__uint128_t) key[11] << 32) |
+      ((__uint128_t) key[12] << 24) | ((__uint128_t) key[13] << 16) |
+      ((__uint128_t) key[14] << 8)  | ((__uint128_t) key[15]);
 
-  /* 
-   *  extract from two bytes comprising byte to 
-   *  which s belongs and adjacent byte
-   */
-  return (((key_safe[s >> 3] << 8) | (key_safe[(s >> 3) + 1])) >>
-          (16 - ((s & 0x7) + n))) & ((1 << n) - 1);
+  return ((key128 >> (128 - (s + n))) & ((1 << n) - 1));
 }
 
 struct fib_tree *
@@ -102,7 +126,7 @@ _add (struct fib_node *n, const uint8_t *key, int keylen, int *route_idx,
 {
   uint32_t index, i;
   uint32_t bits_in_depth, first, count;
-  uint16_t base;
+  uint32_t base;
   int exists = (n != NULL);
 
   if (! exists)
@@ -265,7 +289,7 @@ static struct fib_node *
 _lookup (struct fib_node *n, struct fib_node *cand, const uint8_t *key,
          int depth)
 {
-  uint16_t index;
+  uint32_t index;
 
   if (! n)
     return cand;

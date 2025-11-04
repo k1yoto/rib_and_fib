@@ -7,7 +7,7 @@
 #define ROUTE_TABLE_HASH_MASK   0xFFFFF
 #define MAX_ECMP_ENTRY          1
 #define ROUTE_TREE_SIZE         2 // IPv4 and IPv6
-#define K                       2
+#define K                       3
 #define BRANCH_SZ               (1 << K)
 
 #define KEY_SIZE(len) (((len) + 7) / 8)

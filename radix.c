@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <netinet/in.h>
+#include <arpa/inet.h>
 #include <sys/socket.h>
 
 #include "radix.h"
@@ -171,11 +172,13 @@ _delete (struct rib_node *n, const uint8_t *key, int keylen, int depth,
             {
               if (n->route_idx[i] == idx)
                 {
+#if MAX_ECMP_ENTRY > 1
                   /* shift remaining entries to fill the gap */
                   for (int j = i; j < n->num_routes - 1; j++)
                     {
                       n->route_idx[j] = n->route_idx[j + 1];
                     }
+#endif
                   /* clear the last slot */
                   n->route_idx[n->num_routes - 1] = -1;
                   n->num_routes--;
@@ -283,13 +286,7 @@ _add_to_fib (struct rib_node *n, void *arg)
 {
   struct fib_tree *fib_tree = (struct fib_tree *) arg;
 
-  uint8_t key_str[INET6_ADDRSTRLEN];
-  inet_ntop (fib_tree->family, &n->key, key_str, sizeof (key_str));
-
-  if (fib_tree->family == AF_INET)
-    return fib_route_add4 (fib_tree, n->key, n->keylen, n->route_idx);
-  else
-    return fib_route_add6 (fib_tree, n->key, n->keylen, n->route_idx);
+  return fib_route_add (fib_tree, n->key, n->keylen, n->route_idx);
 }
 
 /* rebuild FIB from RIB */

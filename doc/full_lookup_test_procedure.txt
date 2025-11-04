@@ -1,0 +1,11 @@
+## 前提条件
+- 枯れているptreeの実装を正解として，FIBの検索と比較
+- テスト対象であるsdplaneのRIBとFIB，route_entryの実装を分離
+
+## 手順
+1. RIBとptreeに指定したルートファイルの経路情報を格納
+2. RIBからFIBを生成
+3. FIBとptreeの検索結果(0.0.0.0 ~ 255.255.255.255)を比較し，異なる結果の数をカウント(ミスは3種類に分類．1. FIB，ptreeともにヒットし，ネクストホップが異なる． 2. ptreeのみヒットする． 3. FIBのみヒットする．)
+
+## 結果
+https://github.com/k1yoto/rib_and_fib/blob/main/doc/full_lookup_test.txt

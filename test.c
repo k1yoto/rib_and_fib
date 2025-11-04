@@ -272,6 +272,9 @@ _run_all_lookup (struct fib_tree *fib_tree, struct ptree *ptree)
   uint64_t error_false_positive = 0;
   uint64_t total_errors = 0;
 
+  /* progress tracking */
+  double last_progress;
+
   uint8_t ip_net_u8[4];
   uint32_t ip_host_u32;
 
@@ -285,6 +288,7 @@ _run_all_lookup (struct fib_tree *fib_tree, struct ptree *ptree)
   printf ("progress will be shown every 16M lookups (256 updates total)\n\n");
 
   t1 = now_seconds ();
+  last_progress = t1;
 
   /* iterate through all possible IPv4 addresses: 0.0.0.0 to 255.255.255.255 */
   for (ip_host_u32 = 0; ; ip_host_u32++)
@@ -359,19 +363,19 @@ _run_all_lookup (struct fib_tree *fib_tree, struct ptree *ptree)
       if ((ip_host_u32 & 0xFFFFFF) == 0xFFFFFF)
         {
           double progress = (double)total_lookups / 4294967296.0 * 100.0;
-          double elapsed_so_far = now_seconds () - t1;
-          double estimated_total
-              = (progress > 0.0) ? elapsed_so_far / progress * 100.0 : 0.0;
-          double estimated_remaining = estimated_total - elapsed_so_far;
+          double now = now_seconds ();
+          double elapsed_since_last = now - last_progress;
 
           total_errors = error_nexthop_mismatch + error_missing_route + error_false_positive;
 
           printf ("[progress] %5.2f%% (completed %3u.x.x.x) | found: %" PRIu64
                   " | errors: %" PRIu64 " (nh:%" PRIu64 " miss:%" PRIu64 " fp:%" PRIu64 ")"
-                  " | time: %.1fs\n",
+                  " | time: %.3fs\n",
                   progress, ip_host_u32 >> 24, fib_found_count, total_errors,
                   error_nexthop_mismatch, error_missing_route, error_false_positive,
-                  estimated_remaining);
+                  elapsed_since_last);
+
+          last_progress = now;
         }
 
       /* break at the last address (255.255.255.255) */

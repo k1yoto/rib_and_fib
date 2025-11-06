@@ -1,0 +1,71 @@
+N100
+
+## K=2
+```
+configuration:
+  IP version: IPv4
+  route file: tests/edited.rib.20251001.0000.ipv4.txt
+  mode: performance test
+
+Loading routes from file: tests/edited.rib.20251001.0000.ipv4.txt
+Total 1026214 routes added
+running performance test...
+Elapsed time: 50.543082 sec for 268435456 lookups
+Lookup per second: 5.311023M lookups/sec
+```
+
+## K=3
+```
+configuration:
+  IP version: IPv4
+  route file: tests/edited.rib.20251001.0000.ipv4.txt
+  mode: performance test
+
+Loading routes from file: tests/edited.rib.20251001.0000.ipv4.txt
+Total 1026214 routes added
+running performance test...
+Elapsed time: 48.284980 sec for 268435456 lookups
+Lookup per second: 5.559399M lookups/sec
+```
+
+## K=4
+```
+configuration:
+  IP version: IPv4
+  route file: tests/edited.rib.20251001.0000.ipv4.txt
+  mode: performance test
+
+Loading routes from file: tests/edited.rib.20251001.0000.ipv4.txt
+Total 1026214 routes added
+running performance test...
+Elapsed time: 45.128225 sec for 268435456 lookups
+Lookup per second: 5.948283M lookups/sec
+```
+
+## K=5
+```
+configuration:
+  IP version: IPv4
+  route file: tests/edited.rib.20251001.0000.ipv4.txt
+  mode: performance test
+
+Loading routes from file: tests/edited.rib.20251001.0000.ipv4.txt
+Total 1026214 routes added
+running performance test...
+Elapsed time: 54.073796 sec for 268435456 lookups
+Lookup per second: 4.964243M lookups/sec
+```
+
+## K=6
+```
+configuration:
+  IP version: IPv4
+  route file: tests/edited.rib.20251001.0000.ipv4.txt
+  mode: performance test
+
+Loading routes from file: tests/edited.rib.20251001.0000.ipv4.txt
+Total 1026214 routes added
+running performance test...
+Elapsed time: 53.201212 sec for 268435456 lookups
+Lookup per second: 5.045664M lookups/sec
+```

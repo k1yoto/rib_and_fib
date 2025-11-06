@@ -11,7 +11,7 @@
 
 /*
  * IPv4/v6両方対応. 2バイトブロック取り出す時の番兵バイト確保
- * Lookup per second: 4.460887M lookups/sec
+ * Lookup per second: 4.460887M lookups/sec (K=3)
  */
 #if 0
 static inline uint16_t
@@ -32,7 +32,7 @@ BIT_INDEX (const uint8_t *key, int s, int n)
 
 /*
  * IPv4/v6両方対応. 事前の番兵バイト確保前提
- * Lookup per second: 5.638321M lookups/sec
+ * Lookup per second: 5.638321M lookups/sec (K=3)
  */
 #if 1
 static inline uint16_t
@@ -51,7 +51,7 @@ BIT_INDEX (const uint8_t *key, int s, int n)
 
 /*
  * IPv4 only. 最速
- * Lookup per second: 11.629139M lookups/sec
+ * Lookup per second: 11.629139M lookups/sec (K=3)
  */
 #if 0
 static inline uint32_t
@@ -65,7 +65,7 @@ BIT_INDEX (const uint8_t *key, int s, int n)
 
 /*
  * IPv4/v6両方対応. __uint128_t使用
- * Lookup per second: 5.069909M lookups/sec
+ * Lookup per second: 5.069909M lookups/sec (K=3)
  */
 #if 0
 static inline uint32_t
@@ -325,6 +325,7 @@ int
 rib_route_delete4 (struct rib_tree *t, uint8_t *key, int keylen) {}
 #endif
 
+#if 0
 static struct fib_node *
 _lookup (struct fib_node *n, struct fib_node *cand, const uint8_t *key,
          int depth)
@@ -341,6 +342,27 @@ _lookup (struct fib_node *n, struct fib_node *cand, const uint8_t *key,
 
   return _lookup (n->child[index], cand, key, depth + K);
 }
+#endif
+
+#if 1
+static inline struct fib_node *
+_lookup (struct fib_node *n, struct fib_node *cand, const uint8_t *key,
+         int depth)
+{
+  uint16_t index;
+
+  while (n)
+    {
+      if (n->leaf)
+        cand = n;
+
+      index = BIT_INDEX (key, depth, K);
+      n = n->child[index];
+      depth += K;
+    }
+  return cand;
+}
+#endif
 
 struct fib_node *
 fib_route_lookup (struct fib_tree *t, const uint8_t *key)
@@ -351,7 +373,6 @@ fib_route_lookup (struct fib_tree *t, const uint8_t *key)
   return _lookup (t->root, NULL, key_safe, 0);
 }
 
-#if 0
 /* traverse FIB tree depth-first in-order */
 static int
 _traverse (struct fib_node *n, fib_traverse_callback callback, void *arg,
@@ -362,8 +383,8 @@ _traverse (struct fib_node *n, fib_traverse_callback callback, void *arg,
   if (! n)
     return 0;
 
-  /* process current node if it's a leaf */
-  if (n->leaf && n->num_routes != 0 && callback)
+  /* process current node (both leaf and non-leaf for counting) */
+  if (callback)
     {
       if (callback (n, arg) != 0)
         return -1;
@@ -386,41 +407,3 @@ fib_traverse (struct fib_tree *t, fib_traverse_callback callback, void *arg)
     return 0;
   return _traverse (t->root, callback, arg, 0);
 }
-
-/* callback for show ip route */
-int
-fib_show_route (struct fib_node *n, void *arg)
-{
-  struct show_route_arg *show_arg = (struct show_route_arg *) arg;
-  struct shell *shell = show_arg->shell;
-  struct rib_info *rib_info = show_arg->rib_info;
-  int family = show_arg->family;
-  uint8_t prefix_str[INET6_ADDRSTRLEN];
-  uint8_t nexthop_str[INET6_ADDRSTRLEN];
-  uint8_t dst_str[INET6_ADDRSTRLEN + 5]; // support IPv6 string size
-
-  int i;
-
-  /* format prefix */
-  inet_ntop (family, n->key, prefix_str, sizeof (prefix_str));
-
-  /* show each route */
-  for (i = 0; i < n->num_routes; i++)
-    {
-      int idx = n->route_idx[i];
-      if (idx >= 0 && idx < ROUTE_TABLE_SIZE)
-        {
-          struct route_entry *entry = &rib_info->route_table[idx];
-
-          inet_ntop (family, &entry->nexthop, nexthop_str,
-                     sizeof (nexthop_str));
-          snprintf (dst_str, sizeof (dst_str), "%s/%d", prefix_str, n->keylen);
-
-          fprintf (shell->terminal, "%-30s  via %-26s  dev %u%s", dst_str,
-                   nexthop_str, entry->oif, shell->NL);
-        }
-    }
-
-  return 0;
-}
-#endif

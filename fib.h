@@ -7,7 +7,7 @@
 #define ROUTE_TABLE_HASH_MASK   0xFFFFF
 #define MAX_ECMP_ENTRY          1
 #define ROUTE_TREE_SIZE         2 // IPv4 and IPv6
-#define K                       3
+#define K                       4
 #define BRANCH_SZ               (1 << K)
 
 #define KEY_SIZE(len) (((len) + 7) / 8)
@@ -53,13 +53,6 @@ struct rib_tree
   struct rib_node *root;
 };
 
-// struct show_route_arg
-// {
-//   struct shell *shell;
-//   struct rib_info *rib_info;
-//   int family;
-// };
-
 struct fib_tree *fib_new (struct fib_tree *t);
 void fib_free (struct fib_tree *t);
 
@@ -68,9 +61,8 @@ int fib_route_add (struct fib_tree *t, const uint8_t *key, int keylen,
                     int *route_idx);
 struct fib_node *fib_route_lookup (struct fib_tree *t, const uint8_t *key);
 
-// typedef int (*fib_traverse_callback) (struct fib_node *n, void *arg);
-// int fib_traverse (struct fib_tree *t, fib_traverse_callback callback,
-//                   void *arg);
-// int fib_show_route (struct fib_node *n, void *arg);
+typedef int (*fib_traverse_callback) (struct fib_node *n, void *arg);
+int fib_traverse (struct fib_tree *t, fib_traverse_callback callback,
+                  void *arg);
 
 #endif /* FIB_H */

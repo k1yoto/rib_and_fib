@@ -150,12 +150,56 @@ _load_routes (const char *path, int family, struct rib_tree **rib_tree,
 }
 
 /* -------------------------------------------
+ * Performance benchmark
+ * ランダム IPv4 を大量に引いてルックアップ（正否は不問）
+ * ------------------------------------------- */
+int
+_benchmark_lookup_performance (struct fib_tree *t, uint64_t trials)
+{
+  struct fib_node *n;
+
+  double t1, t2;
+  double elapsed, qps;
+
+  uint8_t rand_net_u8[4]; /* CIDR(ネットワークオーダ) */
+  uint32_t rand_host_u32; /* CIDR(ホストオーダ) */
+
+  if (!t || trials == 0)
+    return -1;
+
+  t1 = now_seconds ();
+
+  /* 最適化回避用の集計変数 */
+  uintptr_t sink = 0;
+
+  for (uint64_t i = 0; i < trials; i++)
+    {
+      rand_host_u32 = xorshift32 (); /* ホストオーダの乱数 */
+      uint32_to_ipv4_bytes_hton (rand_host_u32, rand_net_u8);
+
+      n = fib_route_lookup (t, rand_net_u8);
+      sink ^= (uintptr_t)n;
+    }
+
+  t2 = now_seconds ();
+  elapsed = t2 - t1;
+  qps = (elapsed > 0.0) ? (double)trials / elapsed : 0.0;
+
+  printf ("Elapsed time: %.6f sec for %" PRIu64 " lookups\n", elapsed, trials);
+  printf ("Lookup per second: %.6fM lookups/sec\n", qps / 1e6);
+
+  (void)sink; /* 未使用警告抑止 */
+
+  return 0;
+}
+
+/* -------------------------------------------
  * Basic lookup test
  * ファイル形式: "<ip>"
  * 例: "203.0.113.5"
  * ------------------------------------------- */
 int
-_run_basic_lookup (struct fib_tree *tree, const char *path, int family)
+_run_lookup (struct fib_tree *tree, const char *path, int family)
 {
   printf ("============================================\n");
 
@@ -209,67 +253,28 @@ _run_basic_lookup (struct fib_tree *tree, const char *path, int family)
 }
 
 /* -------------------------------------------
- * Performance benchmark
- * ランダム IPv4 を大量に引いてルックアップ（正否は不問）
- * ------------------------------------------- */
-int
-_benchmark_lookup_performance (struct fib_tree *t, uint64_t trials)
-{
-  struct fib_node *n;
-
-  double t1, t2;
-  double elapsed, qps;
-
-  uint8_t rand_net_u8[4]; /* CIDR(ネットワークオーダ) */
-  uint32_t rand_host_u32; /* CIDR(ホストオーダ) */
-
-  if (!t || trials == 0)
-    return -1;
-
-  t1 = now_seconds ();
-
-  /* 最適化回避用の集計変数 */
-  uintptr_t sink = 0;
-
-  for (uint64_t i = 0; i < trials; i++)
-    {
-      rand_host_u32 = xorshift32 (); /* ホストオーダの乱数 */
-      uint32_to_ipv4_bytes_hton (rand_host_u32, rand_net_u8);
-
-      n = fib_route_lookup (t, rand_net_u8);
-      sink ^= (uintptr_t)n;
-    }
-
-  t2 = now_seconds ();
-  elapsed = t2 - t1;
-  qps = (elapsed > 0.0) ? (double)trials / elapsed : 0.0;
-
-  printf ("Elapsed time: %.6f sec for %" PRIu64 " lookups\n", elapsed, trials);
-  printf ("Lookup per second: %.6fM lookups/sec\n", qps / 1e6);
-
-  (void)sink; /* 未使用警告抑止 */
-
-  return 0;
-}
-
-/* -------------------------------------------
  * Full IPv4 test using ptree as ground truth
  * ------------------------------------------- */
 int
-_run_all_lookup (struct fib_tree *fib_tree, struct ptree *ptree)
+_run_lookup_all (struct fib_tree *fib_tree, struct ptree *ptree)
 {
   struct fib_node *fib_node;
   struct ptree_node *ptree_node;
   double t1, t2;
   double elapsed, qps;
-  uint64_t total_lookups = 0;
-  uint64_t ptree_found_count = 0;
-  uint64_t fib_found_count = 0;
 
-  /* error type breakdown */
+  uint64_t fib_found = 0;
   uint64_t error_nexthop_mismatch = 0;
   uint64_t error_missing_route = 0;
   uint64_t error_false_positive = 0;
+  uint64_t errors = 0;
+
+  uint64_t total_lookups = 0;
+  uint64_t total_ptree_found = 0;
+  uint64_t total_fib_found = 0;
+  uint64_t total_error_nexthop_mismatch = 0;
+  uint64_t total_error_missing_route = 0;
+  uint64_t total_error_false_positive = 0;
   uint64_t total_errors = 0;
 
   /* progress tracking */
@@ -303,8 +308,8 @@ _run_all_lookup (struct fib_tree *fib_tree, struct ptree *ptree)
       if (ptree_node && fib_node)
         {
           /* both found - compare nexthops */
-          ptree_found_count++;
-          fib_found_count++;
+          total_ptree_found++;
+          fib_found++;
           if (memcmp (ptree_node->data,
                       route_table[fib_node->route_idx[0]].nexthop, 4) != 0)
             {
@@ -327,7 +332,7 @@ _run_all_lookup (struct fib_tree *fib_tree, struct ptree *ptree)
       else if (ptree_node && !fib_node)
         {
           /* ptree found but FIB didn't - FIB error */
-          ptree_found_count++;
+          total_ptree_found++;
           error_missing_route++;
           if (error_missing_route <= 10)
             {
@@ -339,10 +344,10 @@ _run_all_lookup (struct fib_tree *fib_tree, struct ptree *ptree)
                       ip_str, expected_str);
             }
         }
-      else if (!ptree_node && fib_node)
+      else if (! ptree_node && fib_node)
         {
           /* FIB found but ptree didn't - FIB error (false positive) */
-          fib_found_count++;
+          fib_found++;
           error_false_positive++;
           if (error_false_positive <= 10)
             {
@@ -366,16 +371,28 @@ _run_all_lookup (struct fib_tree *fib_tree, struct ptree *ptree)
           double now = now_seconds ();
           double elapsed_since_last = now - last_progress;
 
-          total_errors = error_nexthop_mismatch + error_missing_route + error_false_positive;
+          errors = error_nexthop_mismatch + error_missing_route +
+                   error_false_positive;
 
           printf ("[progress] %5.2f%% (completed %3u.x.x.x) | found: %" PRIu64
                   " | errors: %" PRIu64 " (nh:%" PRIu64 " miss:%" PRIu64 " fp:%" PRIu64 ")"
                   " | time: %.3fs\n",
-                  progress, ip_host_u32 >> 24, fib_found_count, total_errors,
-                  error_nexthop_mismatch, error_missing_route, error_false_positive,
-                  elapsed_since_last);
+                  progress, ip_host_u32 >> 24, fib_found, errors,
+                  error_nexthop_mismatch, error_missing_route,
+                  error_false_positive, elapsed_since_last);
 
           last_progress = now;
+          total_fib_found += fib_found;
+          total_error_nexthop_mismatch += error_nexthop_mismatch;
+          total_error_missing_route += error_missing_route;
+          total_error_false_positive += error_false_positive;
+          total_errors += errors;
+
+          fib_found = 0;
+          error_nexthop_mismatch = 0;
+          error_missing_route = 0;
+          error_false_positive = 0;
+          errors = 0;
         }
 
       /* break at the last address (255.255.255.255) */
@@ -386,26 +403,27 @@ _run_all_lookup (struct fib_tree *fib_tree, struct ptree *ptree)
   t2 = now_seconds ();
   elapsed = t2 - t1;
   qps = (elapsed > 0.0) ? (double)total_lookups / elapsed : 0.0;
-  total_errors = error_nexthop_mismatch + error_missing_route + error_false_positive;
+  total_errors = total_error_nexthop_mismatch + total_error_missing_route +
+                 total_error_false_positive;
 
   printf ("\n============================================\n");
   printf ("full IPv4 address space lookup test completed\n");
   printf ("============================================\n");
   printf ("total lookups: %" PRIu64 "\n", total_lookups);
-  printf ("ptree routes found: %" PRIu64 " (%.2f%%)\n", ptree_found_count,
-          (double)ptree_found_count / (double)total_lookups * 100.0);
-  printf ("FIB routes found: %" PRIu64 " (%.2f%%)\n", fib_found_count,
-          (double)fib_found_count / (double)total_lookups * 100.0);
+  printf ("ptree routes found: %" PRIu64 " (%.2f%%)\n", total_ptree_found,
+          (double)total_ptree_found / (double)total_lookups * 100.0);
+  printf ("FIB routes found: %" PRIu64 " (%.2f%%)\n", total_fib_found,
+          (double)total_fib_found / (double)total_lookups * 100.0);
   printf ("\n");
   printf ("total errors: %" PRIu64 " (%.6f%%)\n", total_errors,
           (double)total_errors / (double)total_lookups * 100.0);
   printf ("error breakdown:\n");
-  printf ("  nexthop mismatch: %" PRIu64 " (%.6f%%)\n", error_nexthop_mismatch,
-          (double)error_nexthop_mismatch / (double)total_lookups * 100.0);
-  printf ("  missing routes:   %" PRIu64 " (%.6f%%)\n", error_missing_route,
-          (double)error_missing_route / (double)total_lookups * 100.0);
-  printf ("  false positives:  %" PRIu64 " (%.6f%%)\n", error_false_positive,
-          (double)error_false_positive / (double)total_lookups * 100.0);
+  printf ("  nexthop mismatch: %" PRIu64 " (%.6f%%)\n", total_error_nexthop_mismatch,
+          (double)total_error_nexthop_mismatch / (double)total_lookups * 100.0);
+  printf ("  missing routes:   %" PRIu64 " (%.6f%%)\n", total_error_missing_route,
+          (double)total_error_missing_route / (double)total_lookups * 100.0);
+  printf ("  false positives:  %" PRIu64 " (%.6f%%)\n", total_error_false_positive,
+          (double)total_error_false_positive / (double)total_lookups * 100.0);
   printf ("\n");
   printf ("elapsed time: %.6f sec\n", elapsed);
   printf ("lookup per second: %.6fM lookups/sec\n", qps / 1e6);
@@ -428,48 +446,34 @@ _run_all_lookup (struct fib_tree *fib_tree, struct ptree *ptree)
  * Wrapper functions for test.h
  * ------------------------------------------- */
 int
-test_load_routes (const char *routes_filename, int use_ipv6, struct rib_tree **rib_tree,
+test_load_routes (const char *routes_filename, int family, struct rib_tree **rib_tree,
                   struct ptree **ptree)
 {
-  int family;
-
-  if (! use_ipv6)
-    family = AF_INET;
-  else
-    family = AF_INET6;
-
   return _load_routes (routes_filename, family, rib_tree, ptree);
 }
 
 int
-test_basic (struct fib_tree *t, const char *lookup_addrs_filename, int use_ipv6)
-{
-  int family;
-
-  if (! use_ipv6)
-    family = AF_INET;
-  else
-    family = AF_INET6;
-
-  return _run_basic_lookup (t, lookup_addrs_filename, family);
-}
-
-int
-test_performance (struct fib_tree *t, int use_ipv6)
+test_performance (struct fib_tree *t, int family)
 {
   const uint64_t trials = 0x10000000ULL;
 
-  if (! use_ipv6)
+  if (family == AF_INET)
     return _benchmark_lookup_performance (t, trials);
   else
     return -1; // IPv4 only
 }
 
 int
-test_all (struct fib_tree *fib_tree, struct ptree *ptree, int use_ipv6)
+test_lookup (struct fib_tree *t, const char *lookup_addrs_filename, int family)
 {
-  if (! use_ipv6)
-    return _run_all_lookup (fib_tree, ptree);
+  return _run_lookup (t, lookup_addrs_filename, family);
+}
+
+int
+test_lookup_all (struct fib_tree *fib_tree, struct ptree *ptree, int family)
+{
+  if (family == AF_INET)
+    return _run_lookup_all (fib_tree, ptree);
   else
     return -1; // IPv4 only
 }

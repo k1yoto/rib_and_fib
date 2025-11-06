@@ -1,0 +1,288 @@
+configuration:
+  IP version: IPv4
+  route file: tests/rib.simple.0000.ipv4.txt
+  lookup file: all
+
+Loading routes from file: tests/rib.simple.0000.ipv4.txt
+Total 15 routes added
+full inspection lookup test ...
+============================================
+starting full IPv4 address space lookup test with ptree as ground truth
+testing 2^32 = 4,294,967,296 addresses
+progress will be shown every 16M lookups (256 updates total)
+
+[progress]  0.39% (completed   0.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.314s
+[progress]  0.78% (completed   1.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.331s
+[progress]  1.17% (completed   2.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.319s
+[progress]  1.56% (completed   3.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.311s
+[progress]  1.95% (completed   4.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.315s
+[progress]  2.34% (completed   5.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.333s
+[progress]  2.73% (completed   6.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.312s
+[progress]  3.12% (completed   7.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.311s
+[progress]  3.52% (completed   8.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.408s
+[progress]  3.91% (completed   9.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.382s
+[progress]  4.30% (completed  10.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.534s
+[progress]  4.69% (completed  11.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.383s
+[progress]  5.08% (completed  12.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.316s
+[progress]  5.47% (completed  13.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.343s
+[progress]  5.86% (completed  14.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.317s
+[progress]  6.25% (completed  15.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.316s
+[progress]  6.64% (completed  16.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.336s
+[progress]  7.03% (completed  17.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.312s
+[progress]  7.42% (completed  18.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.312s
+[progress]  7.81% (completed  19.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.337s
+[progress]  8.20% (completed  20.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.312s
+[progress]  8.59% (completed  21.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.312s
+[progress]  8.98% (completed  22.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.336s
+[progress]  9.38% (completed  23.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.312s
+[progress]  9.77% (completed  24.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.312s
+[progress] 10.16% (completed  25.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.337s
+[progress] 10.55% (completed  26.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.311s
+[progress] 10.94% (completed  27.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.312s
+[progress] 11.33% (completed  28.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.336s
+[progress] 11.72% (completed  29.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.311s
+[progress] 12.11% (completed  30.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.311s
+[progress] 12.50% (completed  31.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.335s
+[progress] 12.89% (completed  32.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.291s
+[progress] 13.28% (completed  33.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.289s
+[progress] 13.67% (completed  34.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.289s
+[progress] 14.06% (completed  35.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.313s
+[progress] 14.45% (completed  36.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 14.84% (completed  37.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 15.23% (completed  38.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.314s
+[progress] 15.62% (completed  39.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 16.02% (completed  40.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 16.41% (completed  41.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.304s
+[progress] 16.80% (completed  42.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.298s
+[progress] 17.19% (completed  43.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 17.58% (completed  44.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 17.97% (completed  45.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.313s
+[progress] 18.36% (completed  46.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 18.75% (completed  47.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 19.14% (completed  48.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.314s
+[progress] 19.53% (completed  49.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 19.92% (completed  50.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 20.31% (completed  51.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.295s
+[progress] 20.70% (completed  52.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.310s
+[progress] 21.09% (completed  53.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 21.48% (completed  54.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 21.88% (completed  55.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.312s
+[progress] 22.27% (completed  56.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 22.66% (completed  57.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 23.05% (completed  58.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.314s
+[progress] 23.44% (completed  59.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 23.83% (completed  60.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 24.22% (completed  61.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 24.61% (completed  62.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.314s
+[progress] 25.00% (completed  63.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 25.39% (completed  64.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.289s
+[progress] 25.78% (completed  65.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.314s
+[progress] 26.17% (completed  66.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 26.56% (completed  67.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 26.95% (completed  68.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.311s
+[progress] 27.34% (completed  69.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.293s
+[progress] 27.73% (completed  70.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.289s
+[progress] 28.12% (completed  71.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.288s
+[progress] 28.52% (completed  72.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.313s
+[progress] 28.91% (completed  73.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 29.30% (completed  74.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.291s
+[progress] 29.69% (completed  75.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.314s
+[progress] 30.08% (completed  76.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.288s
+[progress] 30.47% (completed  77.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.289s
+[progress] 30.86% (completed  78.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.297s
+[progress] 31.25% (completed  79.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.306s
+[progress] 31.64% (completed  80.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 32.03% (completed  81.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 32.42% (completed  82.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.313s
+[progress] 32.81% (completed  83.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 33.20% (completed  84.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 33.59% (completed  85.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.316s
+[progress] 33.98% (completed  86.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 34.38% (completed  87.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 34.77% (completed  88.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 35.16% (completed  89.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.314s
+[progress] 35.55% (completed  90.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 35.94% (completed  91.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 36.33% (completed  92.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.314s
+[progress] 36.72% (completed  93.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 37.11% (completed  94.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 37.50% (completed  95.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.311s
+[progress] 37.89% (completed  96.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.293s
+[progress] 38.28% (completed  97.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 38.67% (completed  98.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 39.06% (completed  99.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.314s
+[progress] 39.45% (completed 100.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.289s
+[progress] 39.84% (completed 101.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.289s
+[progress] 40.23% (completed 102.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.314s
+[progress] 40.62% (completed 103.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 41.02% (completed 104.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 41.41% (completed 105.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.302s
+[progress] 41.80% (completed 106.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.301s
+[progress] 42.19% (completed 107.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 42.58% (completed 108.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.289s
+[progress] 42.97% (completed 109.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.314s
+[progress] 43.36% (completed 110.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.289s
+[progress] 43.75% (completed 111.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.289s
+[progress] 44.14% (completed 112.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.314s
+[progress] 44.53% (completed 113.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 44.92% (completed 114.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 45.31% (completed 115.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.292s
+[progress] 45.70% (completed 116.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.312s
+[progress] 46.09% (completed 117.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 46.48% (completed 118.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.289s
+[progress] 46.88% (completed 119.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.314s
+[progress] 47.27% (completed 120.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.289s
+[progress] 47.66% (completed 121.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 48.05% (completed 122.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.313s
+[progress] 48.44% (completed 123.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.291s
+[progress] 48.83% (completed 124.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 49.22% (completed 125.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 49.61% (completed 126.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.314s
+[progress] 50.00% (completed 127.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.290s
+[progress] 50.39% (completed 128.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.341s
+[progress] 50.78% (completed 129.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.366s
+[progress] 51.17% (completed 130.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.341s
+[progress] 51.56% (completed 131.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.341s
+[progress] 51.95% (completed 132.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.365s
+[progress] 52.34% (completed 133.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.341s
+[progress] 52.73% (completed 134.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.345s
+[progress] 53.12% (completed 135.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.363s
+[progress] 53.52% (completed 136.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.342s
+[progress] 53.91% (completed 137.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.361s
+[progress] 54.30% (completed 138.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.347s
+[progress] 54.69% (completed 139.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.342s
+[progress] 55.08% (completed 140.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.367s
+[progress] 55.47% (completed 141.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.341s
+[progress] 55.86% (completed 142.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.341s
+[progress] 56.25% (completed 143.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.367s
+[progress] 56.64% (completed 144.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.342s
+[progress] 57.03% (completed 145.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.341s
+[progress] 57.42% (completed 146.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.366s
+[progress] 57.81% (completed 147.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.341s
+[progress] 58.20% (completed 148.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.341s
+[progress] 58.59% (completed 149.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.366s
+[progress] 58.98% (completed 150.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.342s
+[progress] 59.38% (completed 151.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.341s
+[progress] 59.77% (completed 152.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.366s
+[progress] 60.16% (completed 153.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.342s
+[progress] 60.55% (completed 154.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.348s
+[progress] 60.94% (completed 155.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.632s
+[progress] 61.33% (completed 156.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.533s
+[progress] 61.72% (completed 157.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.341s
+[progress] 62.11% (completed 158.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.341s
+[progress] 62.50% (completed 159.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.366s
+[progress] 62.89% (completed 160.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.366s
+[progress] 63.28% (completed 161.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.366s
+[progress] 63.67% (completed 162.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.390s
+[progress] 64.06% (completed 163.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.366s
+[progress] 64.45% (completed 164.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.390s
+[progress] 64.84% (completed 165.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.367s
+[progress] 65.23% (completed 166.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.366s
+[progress] 65.62% (completed 167.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.390s
+[progress] 66.02% (completed 168.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.366s
+[progress] 66.41% (completed 169.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.366s
+[progress] 66.80% (completed 170.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.393s
+[progress] 67.19% (completed 171.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.366s
+[progress] 67.58% (completed 172.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.445s
+[progress] 67.97% (completed 173.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.382s
+[progress] 68.36% (completed 174.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.382s
+[progress] 68.75% (completed 175.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.407s
+[progress] 69.14% (completed 176.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.367s
+[progress] 69.53% (completed 177.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.388s
+[progress] 69.92% (completed 178.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.369s
+[progress] 70.31% (completed 179.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.366s
+[progress] 70.70% (completed 180.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.392s
+[progress] 71.09% (completed 181.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.366s
+[progress] 71.48% (completed 182.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.366s
+[progress] 71.88% (completed 183.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.389s
+[progress] 72.27% (completed 184.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.366s
+[progress] 72.66% (completed 185.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.388s
+[progress] 73.05% (completed 186.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.368s
+[progress] 73.44% (completed 187.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.366s
+[progress] 73.83% (completed 188.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.391s
+[progress] 74.22% (completed 189.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.366s
+[progress] 74.61% (completed 190.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.366s
+[progress] 75.00% (completed 191.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.390s
+[progress] 75.39% (completed 192.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.611s
+[progress] 75.78% (completed 193.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.585s
+[progress] 76.17% (completed 194.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.583s
+[progress] 76.56% (completed 195.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.561s
+[progress] 76.95% (completed 196.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.581s
+[progress] 77.34% (completed 197.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.561s
+[progress] 77.73% (completed 198.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.619s
+[progress] 78.12% (completed 199.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.561s
+[progress] 78.52% (completed 200.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.499s
+[progress] 78.91% (completed 201.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.479s
+[progress] 79.30% (completed 202.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.500s
+[progress] 79.69% (completed 203.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.512s
+[progress] 80.08% (completed 204.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.467s
+[progress] 80.47% (completed 205.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.443s
+[progress] 80.86% (completed 206.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.471s
+[progress] 81.25% (completed 207.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.449s
+[progress] 81.64% (completed 208.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.410s
+[progress] 82.03% (completed 209.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.387s
+[progress] 82.42% (completed 210.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.387s
+[progress] 82.81% (completed 211.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.410s
+[progress] 83.20% (completed 212.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.386s
+[progress] 83.59% (completed 213.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.412s
+[progress] 83.98% (completed 214.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.387s
+[progress] 84.38% (completed 215.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.385s
+[progress] 84.77% (completed 216.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.411s
+[progress] 85.16% (completed 217.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.386s
+[progress] 85.55% (completed 218.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.411s
+[progress] 85.94% (completed 219.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.386s
+[progress] 86.33% (completed 220.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.386s
+[progress] 86.72% (completed 221.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.412s
+[progress] 87.11% (completed 222.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.386s
+[progress] 87.50% (completed 223.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.410s
+[progress] 87.89% (completed 224.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.361s
+[progress] 88.28% (completed 225.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.361s
+[progress] 88.67% (completed 226.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.387s
+[progress] 89.06% (completed 227.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.361s
+[progress] 89.45% (completed 228.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.362s
+[progress] 89.84% (completed 229.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.384s
+[progress] 90.23% (completed 230.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.361s
+[progress] 90.62% (completed 231.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.387s
+[progress] 91.02% (completed 232.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.361s
+[progress] 91.41% (completed 233.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.361s
+[progress] 91.80% (completed 234.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.386s
+[progress] 92.19% (completed 235.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.361s
+[progress] 92.58% (completed 236.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.361s
+[progress] 92.97% (completed 237.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.388s
+[progress] 93.36% (completed 238.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.362s
+[progress] 93.75% (completed 239.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.383s
+[progress] 94.14% (completed 240.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.364s
+[progress] 94.53% (completed 241.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.361s
+[progress] 94.92% (completed 242.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.387s
+[progress] 95.31% (completed 243.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.362s
+[progress] 95.70% (completed 244.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.362s
+[progress] 96.09% (completed 245.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.386s
+[progress] 96.48% (completed 246.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.362s
+[progress] 96.88% (completed 247.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.377s
+[progress] 97.27% (completed 248.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.372s
+[progress] 97.66% (completed 249.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.362s
+[progress] 98.05% (completed 250.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.387s
+[progress] 98.44% (completed 251.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.362s
+[progress] 98.83% (completed 252.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.361s
+[progress] 99.22% (completed 253.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.386s
+[progress] 99.61% (completed 254.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.361s
+[progress] 100.00% (completed 255.x.x.x) | found: 16777216 | errors: 0 (nh:0 miss:0 fp:0) | time: 0.365s
+
+============================================
+full IPv4 address space lookup test completed
+============================================
+total lookups: 4294967296
+ptree routes found: 4294967296 (100.00%)
+FIB routes found: 4294967296 (100.00%)
+
+total errors: 0 (0.000000%)
+error breakdown:
+  nexthop mismatch: 0 (0.000000%)
+  missing routes:   0 (0.000000%)
+  false positives:  0 (0.000000%)
+
+elapsed time: 89.604733 sec
+lookup per second: 47.932371M lookups/sec
+============================================
+
+*** SUCCESS: FIB lookups are correct! ***

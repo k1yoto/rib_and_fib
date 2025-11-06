@@ -8,4 +8,4 @@
 3. FIBとptreeの検索結果(0.0.0.0 ~ 255.255.255.255)を比較し，異なる結果の数をカウント(ミスは3種類に分類．1. FIB，ptreeともにヒットし，ネクストホップが異なる． 2. ptreeのみヒットする． 3. FIBのみヒットする．)
 
 ## 結果
-https://github.com/k1yoto/rib_and_fib/blob/main/doc/full_lookup_test.txt
+[results](https://github.com/k1yoto/rib_and_fib/blob/main/doc/results)

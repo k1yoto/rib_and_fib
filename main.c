@@ -1,3 +1,4 @@
+#include <arpa/inet.h>
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
@@ -22,8 +23,7 @@ usage (const char *prog)
 int
 main (int argc, const char *const argv[])
 {
-  int ret;
-  int use_ipv6 = 0; /* 0=IPv4, 1=IPv6 */
+  int ret, family;
   const char *route_file = NULL;
   const char *lookup_file = NULL;
   int arg_idx = 1;
@@ -42,9 +42,11 @@ main (int argc, const char *const argv[])
   /* -6 option (optional) */
   if (arg_idx < argc && strcmp (argv[arg_idx], "-6") == 0)
     {
-      use_ipv6 = 1;
+      family = AF_INET6;
       arg_idx++;
     }
+  else
+    family = AF_INET;
 
   /* route file (required) */
   if (arg_idx >= argc)
@@ -65,7 +67,7 @@ main (int argc, const char *const argv[])
 
   /* show configuration */
   fprintf (stdout, "configuration:\n");
-  fprintf (stdout, "  IP version: %s\n", use_ipv6 ? "IPv6" : "IPv4");
+  fprintf (stdout, "  IP version: %s\n", family == AF_INET ? "IPv4" : "IPv6");
   fprintf (stdout, "  route file: %s\n", route_file);
   if (lookup_file)
     fprintf (stdout, "  lookup file: %s\n", lookup_file);
@@ -74,7 +76,7 @@ main (int argc, const char *const argv[])
   fprintf (stdout, "\n");
 
   /* load routes */
-  if (test_load_routes (route_file, use_ipv6, &rib_tree, &ptree) != 0)
+  if (test_load_routes (route_file, family, &rib_tree, &ptree) != 0)
     {
       fprintf (stderr, "failed to load routes from %s\n", route_file);
       if (rib_tree)
@@ -100,20 +102,20 @@ main (int argc, const char *const argv[])
     {
       /* performance test */
       fprintf (stdout, "running performance test...\n");
-      ret = test_performance (fib_tree, use_ipv6);
+      ret = test_performance (fib_tree, family);
     }
   else if (strcmp (lookup_file, "all") == 0)
     {
       /*  full inspection lookup test */
       fprintf (stdout, "full inspection lookup test ...\n");
-      ret = test_all (fib_tree, ptree, use_ipv6);
+      ret = test_lookup_all (fib_tree, ptree, family);
     }
   else
     {
       /* basic lookup test */
       fprintf (stdout, "running basic test with lookup file %s...\n",
                lookup_file);
-      ret = test_basic (fib_tree, lookup_file, use_ipv6);
+      ret = test_lookup (fib_tree, lookup_file, family);
     }
 
   if (ret < 0)

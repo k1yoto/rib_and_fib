@@ -97,6 +97,9 @@ main (int argc, const char *const argv[])
       return -1;
     }
 
+  /* show FIB node statistics */
+  test_count_fib_nodes (fib_tree);
+
   /* run tests */
   if (! lookup_file)
     {

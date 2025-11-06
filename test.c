@@ -443,6 +443,56 @@ _run_lookup_all (struct fib_tree *fib_tree, struct ptree *ptree)
 }
 
 /* -------------------------------------------
+ * FIB node counte
+ * ------------------------------------------- */
+struct node_count_arg
+{
+  uint64_t total_nodes;
+  uint64_t leaf_nodes;
+  uint64_t internal_nodes;
+};
+
+static int
+_count_node_callback (struct fib_node *n, void *arg)
+{
+  struct node_count_arg *count = (struct node_count_arg *)arg;
+
+  count->total_nodes++;
+
+  if (n->leaf)
+    count->leaf_nodes++;
+  else
+    count->internal_nodes++;
+
+  return 0;
+}
+
+void
+test_count_fib_nodes (struct fib_tree *t)
+{
+  struct node_count_arg count = { 0, 0, 0 };
+
+  if (! t || ! t->root)
+    {
+      printf ("FIB tree is empty\n");
+      return;
+    }
+
+  fib_traverse (t, _count_node_callback, &count);
+
+  printf ("============================================\n");
+  printf ("FIB node statistics:\n");
+  printf ("  Total nodes:    %'" PRIu64 "\n", count.total_nodes);
+  printf ("  Leaf nodes:     %'" PRIu64 " (%.2f%%)\n",
+          count.leaf_nodes,
+          (double)count.leaf_nodes / (double)count.total_nodes * 100.0);
+  printf ("  Internal nodes: %'" PRIu64 " (%.2f%%)\n",
+          count.internal_nodes,
+          (double)count.internal_nodes / (double)count.total_nodes * 100.0);
+  printf ("============================================\n");
+}
+
+/* -------------------------------------------
  * Wrapper functions for test.h
  * ------------------------------------------- */
 int
